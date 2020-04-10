@@ -16,11 +16,11 @@
     echo validation_errors(); 
     echo form_open(); 
  ?>
-<input type="hidden" name="id" value="<?php echo $produit[0]->pro_id; ?>"> 
+<input type="hidden" name="id" value="<?php echo $produit->pro_id; ?>"> 
 
 <div class="form-group">
     <label for="pro_ref">Référence</label>
-    <input type="text" name="pro_ref" id="pro_ref" class="form-control" value="<?php echo set_value('pro_ref', $produit[0]->pro_ref); ?>">
+    <input type="text" name="pro_ref" id="pro_ref" class="form-control" value="<?php echo set_value('pro_ref', $produit->pro_ref); ?>">
     <?php echo form_error('pro_ref'); ?>
 </div>
 
@@ -29,7 +29,7 @@
             <select name="pro_cat_id" id="pro_cat_id" class="form-control"> 
                 <option value="" selected>Choisir une catégorie</option>
                 <?php foreach($categories as $category) { ?>
-                    <option value= "<?php echo set_value('pro_cat_id', $produit[0]->pro_cat_id); ?>" <?=($produit[0]->pro_cat_id == $category->cat_id) ? 'selected' : '' ?>> <?= $category->cat_id.'. '.$category->cat_nom ?>
+                    <option value= "<?php echo set_value('pro_cat_id', $produit->pro_cat_id); ?>" <?=($produit->pro_cat_id == $category->cat_id) ? 'selected' : '' ?>> <?= $category->cat_id.'. '.$category->cat_nom ?>
                     </option>
                 <?php } ?>              
             </select>
@@ -38,37 +38,37 @@
 
 <div class="form-group">
     <label for="pro_libelle">Libellé</label>
-    <input type="text" name="pro_libelle" id="pro_libelle" class="form-control" value="<?php echo set_value('pro_libelle', $produit[0]->pro_libelle); ?>">
+    <input type="text" name="pro_libelle" id="pro_libelle" class="form-control" value="<?php echo set_value('pro_libelle', $produit->pro_libelle); ?>">
     <?php echo form_error('pro_libelle'); ?>
 </div>
 
 <div class="form-group">
     <label for="pro_description">Description</label>
-    <input type="text" name="pro_description" id="pro_description" class="form-control" value="<?php echo set_value('pro_description', $produit[0]->pro_description); ?>">
+    <input type="text" name="pro_description" id="pro_description" class="form-control" value="<?php echo set_value('pro_description', $produit->pro_description); ?>">
     <?php echo form_error('pro_description'); ?>
 </div>
 
         <div class="form-group">
             <label for="pro_prix">Prix</label>
-            <input type="text" name="pro_prix" id="pro_prix" class="form-control" value="<?php echo set_value('pro_prix', $produit[0]->pro_prix); ?>">
+            <input type="text" name="pro_prix" id="pro_prix" class="form-control" value="<?php echo set_value('pro_prix', $produit->pro_prix); ?>">
             <?php echo form_error('pro_prix'); ?>
         </div>
 
         <div class="form-group">
             <label for="pro_stock">Stock</label>
-            <input type="text" name="pro_stock" id="pro_stock" class="form-control" value="<?php echo set_value('pro_stock', $produit[0]->pro_stock); ?>">
+            <input type="text" name="pro_stock" id="pro_stock" class="form-control" value="<?php echo set_value('pro_stock', $produit->pro_stock); ?>">
             <?php echo form_error('pro_stock'); ?>
         </div>
 
         <div class="form-group">
             <label for="pro_couleur">Couleur</label>
-            <input type="text" name="pro_couleur" id="pro_couleur" class="form-control" value="<?php echo set_value('pro_couleur', $produit[0]->pro_couleur); ?>">
+            <input type="text" name="pro_couleur" id="pro_couleur" class="form-control" value="<?php echo set_value('pro_couleur', $produit->pro_couleur); ?>">
             <?php echo form_error('pro_couleur'); ?>
         </div>
 
         <div class="form-group">
             <label for="pro_photo">Photo</label>
-            <input type="text" name="pro_photo" id="pro_photo" class="form-control" value="<?php echo set_value('pro_photo', $produit[0]->pro_photo); ?>">
+            <input type="text" name="pro_photo" id="pro_photo" class="form-control" value="<?php echo set_value('pro_photo', $produit->pro_photo); ?>">
             <?php echo form_error('pro_photo'); ?>
         </div>
 
@@ -83,6 +83,8 @@
         </div>
 
 <button type="submit" >Modifier</button>
+<a  href="<?= site_url('produits/supprimer/'). $produit->pro_id ?> ">Supprimer</a>
+
 </form>
 
 </body>

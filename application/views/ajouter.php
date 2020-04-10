@@ -1,7 +1,4 @@
-<!-- application/views/modifier.php -->
-<?php
-var_dump($categories);
-?>
+<!-- application/views/ajouter.php -->
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -14,12 +11,11 @@ var_dump($categories);
 <body>
 
     <a class="btn btn-secondary" href="<?= site_url("produits/liste");?> ">Retour</a>
-    <!-- <a href="<?= site_url("produits/modifier");?> ">Ajouter</a> -->
 
-    <?php echo validation_errors(); ?>
-
-    <?php echo form_open(); ?>
-
+    <?php 
+        echo validation_errors(); 
+        echo form_open(); 
+    ?>
         <div class="form-group">
             <label for="pro_ref">Référence</label>
             <input type="text" name="pro_ref" id="pro_ref" class="form-control" value="<?php echo set_value('pro_ref'); ?>">

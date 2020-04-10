@@ -6,7 +6,7 @@ class CategoriesModel extends CI_Model
     public function liste()
     {
         $this->load->database();
-        $aCategories = $this->db->query("SELECT * FROM `jarditou_categories`")->result();
+        $aCategories = $this->db->query("SELECT * FROM jarditou_categories")->result();
     
     return $aCategories; 
     }

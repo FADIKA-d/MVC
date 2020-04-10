@@ -20,7 +20,7 @@
     <tr>
         <td> <?php echo $value->pro_id; ?> </td>  
         <td> <?php echo $value->pro_ref; ?> </td>  
-        <td> <?php echo $value->pro_libelle; ?> </td>  
+        <td><a href="<?= site_url('produits/modifier/') . $value->pro_id ?>"><?php echo $value->pro_libelle; ?></a> </td>  
         <td> <?php echo $value->pro_description; ?> </td>  
         <td> <?php echo $value->pro_prix; ?> </td>  
         <td> <?php echo $value->pro_stock; ?> </td>  
@@ -33,8 +33,7 @@
     <?php
     }   
     ?>   
-    </table> 
-    <a href="<?= site_url("produits/modifier/7");?> ">Modifier</a>
+    </table>
     <a href="<?= site_url("produits/ajouter");?> ">Ajouter</a>
 </body>
 </html>
