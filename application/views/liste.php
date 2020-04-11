@@ -12,11 +12,23 @@
     <h1>Liste des produits</h1>
     <div> Liste : </div>
     <table>
-    <th></th>
-    
+    <thead>
+        <th> ID </th>  
+        <th> Référence </th>  
+        <th> Libellé </th>  
+        <th> Description </th>  
+        <th> Prix </th>  
+        <th> Stock </th>  
+        <th> Couleur </th>  
+        <th> Photo </th>  
+        <th> Date d'ajout </th>  
+        <th> Date de modification </th>  
+        <th> Produit Bloqué </th> 
+    </thead>
     <?php foreach($liste as $value) 
     { 
     ?> 
+    <tbody>
     <tr>
         <td> <?php echo $value->pro_id; ?> </td>  
         <td> <?php echo $value->pro_ref; ?> </td>  
@@ -30,6 +42,7 @@
         <td> <?php echo $value->pro_d_modif; ?> </td>  
         <td> <?php echo $value->pro_bloque; ?> </td>  
     </tr>
+    </tbody>
     <?php
     }   
     ?>   

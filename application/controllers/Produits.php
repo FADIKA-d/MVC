@@ -31,35 +31,25 @@ class Produits extends CI_Controller
 
         // condition : si il existe des valeurs dans le tableau post
         if($this->input->post())
-        {
-            //2ème appel de la vue : traitement du formulaire
+        { //2ème appel de la vue : traitement du formulaire
 
-            // valeur du post dans data
+            // valeur du post dans la variable data
             $data = $this->input->post();
             // ajout d'une date d'ajout dans le formulaire post
             $data ["pro_d_ajout"] = date("Y-m-d");
-            // Définition des filtres
-            $this->form_validation->set_rules("pro_ref", "Référence", "required");
-            $this->form_validation->set_rules("pro_cat_id", "Catégorie", "required");
-            $this->form_validation->set_rules("pro_libelle", "Libellé", "required");
-            $this->form_validation->set_rules("pro_description", "Description", "required");
-            $this->form_validation->set_rules("pro_prix", "Prix", "required");
-            $this->form_validation->set_rules("pro_stock", "Stock", "required");
-            $this->form_validation->set_rules("pro_couleur", "Couleur", "required");
-            $this->form_validation->set_rules("pro_photo", "Photo", "required");
-            $this->form_validation->set_rules("pro_bloque", "Bloqué");
-            // $this->form_validation->set_error_delimiters('<div class="alert alert-danger">', '</div>');  
+          
+            $this->form_validation->set_error_delimiters('<div class="alert alert-danger">', '</div>');  
             // $this->form_validation->set_error_delimiters('<div class="invalid-feedback">', '</div>');  
                     
             // condition : si echec de la validation des filtres
             if ($this->form_validation->run() == FALSE)
                 { 
-                    // réaffichage de la vue formulaire 
-                     $this->load->view('ajouter', $aView);
+                // réaffichage de la vue formulaire 
+                $this->load->view('ajouter', $aView);
                 }
             else // sinon (réussite de la validation des filtres : insertion des valeurs en BDD)
                 {
-                   // chargement du modèle 'produitsModel' 
+                // chargement du modèle 'produitsModel' 
                 $this->load->model('ProduitsModel');
                 // appel de la méthode ajouter du modèle ProduitsModel
                 $aListe = $this->ProduitsModel->ajouter($data); 
@@ -72,7 +62,6 @@ class Produits extends CI_Controller
         {     
             // 1er appel de la vue : affichage du formulaire
             $this->load->view('ajouter', $aView);
-            
         }
     }
     // fonction de modification d'un produit de la BDD
@@ -106,16 +95,7 @@ class Produits extends CI_Controller
             $id = $this->input->post('id');
             // ajout d'une date d'ajout dans le formulaire post
             $data["pro_d_modif"] = date("Y-m-d");
-            // Définition des filtres
-            $this->form_validation->set_rules("pro_ref", "Référence", "required");
-            $this->form_validation->set_rules("pro_cat_id", "Catégorie", "required");
-            $this->form_validation->set_rules("pro_libelle", "Libellé", "required");
-            $this->form_validation->set_rules("pro_description", "Description", "required");
-            $this->form_validation->set_rules("pro_prix", "Prix", "required");
-            $this->form_validation->set_rules("pro_stock", "Stock", "required");
-            $this->form_validation->set_rules("pro_couleur", "Couleur", "required");
-            $this->form_validation->set_rules("pro_photo", "Photo", "required");
-            $this->form_validation->set_rules("pro_bloque", "Bloqué");
+            
             // $this->form_validation->set_error_delimiters('<div class="alert alert-danger">', '</div>'); 
         
             // condition : si echec de la validation des filtres
