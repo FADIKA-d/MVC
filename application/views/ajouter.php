@@ -4,9 +4,7 @@
 <head>
     <meta charset="utf-8">
     <title>Ajouter</title>
-    <link rel="stylesheet" href="<?= base_url("assets/css/style.css"); ?>"> 
-    <link rel="stylesheet" href="<?= base_url("assets/css/style.img"); ?>"> 
-    <link rel="stylesheet" href="<?= base_url("assets/css/style.js"); ?>"> 
+    <link rel="stylesheet" href="<?= base_url("assets/css/style.css"); ?>">
 </head>
 <body>
 
@@ -64,13 +62,11 @@
             <?php echo form_error('pro_couleur'); ?>
         </div>
 
-       
-
         <div class="form-group">
-            <label for="pro_photo">Téléchargement</label>
+            <label for="pro_photo">Téléchargement de la photo</label>
             <input type="file" name="pro_photo" id="pro_photo">
             <?php echo form_error('errors'); ?>
-            <?php echo form_error('fichier'); ?>
+            <?php echo form_error('pro_photo'); ?>
         </div>
 
         <div class="form-group">

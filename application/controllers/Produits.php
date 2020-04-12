@@ -55,27 +55,16 @@ class Produits extends CI_Controller
                     // condition si :il existe un post files
                     if($_FILES)
                     {
-
-                    //extraction de l'extension du fichier dans la variable extension
-                    // methode 1
-                    $extension = substr(strrchr($_FILES["pro_photo"]["name"], "."), 1);
-                    
-                        //methode 2
-                        // // assignation du nom du fichier upload à la variable $path_parts
-                        // $path_parts= pathinfo($_FILES['pro_photo']['name']);
-
-                        // // assignation de l'extension du fichier upload à la variable $extension
-                        // $extension = $path_parts['extension'];
-
+                        //extraction de l'extension du fichier dans la variable extension
+                        $extension = substr(strrchr($_FILES["pro_photo"]["name"], "."), 1);
                     }
                     // chargement du modèle 'produitsModel' 
                     $this->load->model('ProduitsModel');
                     // appel de la méthode ajouter du modèle ProduitsModel
                     $aId = $this->ProduitsModel->ajouter($data); 
-                    // recupération de l'id
-                  
-                            //id retourné de la méthode du modèle ajouter dans le tableau aView
-                            $aView["id"] = $aId;
+        
+                    //recupération de l'id : id retourné de la méthode du modèle ajouter dans le tableau aView
+                    $aView["id"] = $aId;
 
                     // chemin du fichier stocké
                     $config['upload_path'] = './assets/img/';
@@ -90,11 +79,12 @@ class Produits extends CI_Controller
                     //hauteur maximum  autorisée
                     $config['max_height'] = 768;
                     //chargement de la librairie 'upload' avec le tableau config
-                    $this->load->library('upload', $config);
-                    var_dump($config);
-                     // initialisation de config 
+                    $this->load->library('upload');
+
+                    // initialisation de config 
                     $this->upload->initialize($config);
-                    // condition si : 
+
+                    // condition si : echec de l'upload
                     if(! $this->upload->do_upload('pro_photo'))
                     {
                         // récupération des erreurs dans une variable errors
@@ -132,8 +122,11 @@ class Produits extends CI_Controller
         $aProduit = $this->ProduitsModel->produit($id);
         //tableau retourné de la méthode du modèle dans le tableau aView
         $aView["produit"] = $aProduit;
+
+        // Chargement de la librairie 'upload'
+        $this->load->library('upload');
              
-        // condition : si il existe des valeurs dans le tableau post
+        // condition si : il existe des valeurs dans le tableau post
         if($this->input->post())
         { //2ème appel de la vue : traitement du formulaire
             
@@ -148,7 +141,7 @@ class Produits extends CI_Controller
             
             // $this->form_validation->set_error_delimiters('<div class="alert alert-danger">', '</div>'); 
         
-            // condition : si echec de la validation des filtres
+            // condition si : echec de la validation des filtres
             if ($this->form_validation->run() == FALSE)
                 { 
                     // réaffichage de la vue formulaire 
@@ -156,12 +149,61 @@ class Produits extends CI_Controller
                 }
                 else // sinon (réussite de la validation des filtres : insertion des valeurs en BDD)
                 {
+                    // condition si :il existe un post files
+                    if($_FILES)
+                    {
+                    //     //extraction de l'extension du fichier dans la variable extension
+                    //     $extension = substr(strrchr($_FILES["pro_photo"]["name"], "."), 1);
+
+                    //     //extraction de l'extension du fichier dans la variable extension
+                    // // methode 1
+                    // $extension = substr(strrchr($_FILES["pro_photo"]["name"], "."), 1);
+                    
+                    // //methode 2
+                    // assignation du nom du fichier upload à la variable $path_parts
+                    $path_parts= pathinfo($_FILES['pro_photo']['name']);
+
+                    // assignation de l'extension du fichier upload à la variable $extension
+                    $extension = $path_parts['extension'];
+                    }
                     // chargement du moddèle 'produitsModel' 
                     $this->load->model('ProduitsModel');
                     // appel de la méthode modifier du modèle ProduitsModel
                     $this->ProduitsModel->modifier($data, $id);
-                    // fonction de redirection vers la page liste pour afficher la modification                 
-                    redirect("produits/liste");
+
+                    // chemin du fichier stocké
+                    $config['upload_path'] = './assets/img/';
+                    // nom du fichier
+                    $config['file_name'] = $id . '.' . $extension;
+                    //fichiers autorisés
+                    $config['allowed_types'] = 'gif|jpg|png';
+                    //taille maximum  autorisée
+                    $config['max_size'] = 400;
+                    //largeur maximum  autorisée
+                    $config['max_width'] = 1024;
+                    //hauteur maximum  autorisée
+                    $config['max_height'] = 768;
+                    
+                    //chargement de la librairie 'upload' avec le tableau config
+                    $this->load->library('upload');
+
+                    // initialisation de config 
+                    $this->upload->initialize($config);
+
+                    // condition si : echec de l'upload
+                    if(!$this->upload->do_upload('pro_photo'))
+                    {
+                        // récupération des erreurs dans une variable errors
+                        $errors =  $this->upload->display_errors("<div class='alert alert-danger'>", "</div>");
+                        $aView["errors"]= $errors;
+                        // réaffichage de la vue du formulaire modifier avec les donnés saisies et errors
+                        $this->load->view('modifier', $aView);
+                    }
+                    else
+                    {
+                        // fonction de redirection vers la page liste pour afficher la modification                 
+                        redirect("produits/liste");
+                    }
                 }
         }
         else

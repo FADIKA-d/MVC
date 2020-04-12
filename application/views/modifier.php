@@ -4,9 +4,7 @@
 <head>
     <meta charset="utf-8">
     <title>Modifier</title>
-    <link rel="stylesheet" href="<?= base_url("assets/css/style.css"); ?>"> 
-    <link rel="stylesheet" href="<?= base_url("assets/css/style.img"); ?>"> 
-    <link rel="stylesheet" href="<?= base_url("assets/css/style.js"); ?>"> 
+    <link rel="stylesheet" href="<?= base_url("assets/css/style.css"); ?>">
 </head>
 <body>
 
@@ -14,7 +12,7 @@
     <a href="<?= site_url("produits/ajouter");?> ">Ajouter</a>
 <?php 
     echo validation_errors(); 
-    echo form_open(); 
+    echo form_open_multipart(); 
  ?>
 <input type="hidden" name="id" value="<?php echo $produit->pro_id; ?>"> 
 
@@ -67,8 +65,9 @@
         </div>
 
         <div class="form-group">
-            <label for="pro_photo">Photo</label>
-            <input type="text" name="pro_photo" id="pro_photo" class="form-control" value="<?php echo set_value('pro_photo', $produit->pro_photo); ?>">
+            <label for="pro_photo">Téléchargement de la photo</label>
+            <input type="file" name="pro_photo" id="pro_photo">
+            <?php echo form_error('errors'); ?>
             <?php echo form_error('pro_photo'); ?>
         </div>
 
