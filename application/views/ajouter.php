@@ -14,7 +14,7 @@
 
     <?php 
         echo validation_errors(); 
-        echo form_open(); 
+        echo form_open_multipart(); 
     ?>
         <div class="form-group">
             <label for="pro_ref">Référence</label>
@@ -64,10 +64,13 @@
             <?php echo form_error('pro_couleur'); ?>
         </div>
 
+       
+
         <div class="form-group">
-            <label for="pro_photo">Photo</label>
-            <input type="text" name="pro_photo" id="pro_photo" class="form-control" value="<?php echo set_value('pro_photo'); ?>">
-            <?php echo form_error('pro_photo'); ?>
+            <label for="pro_photo">Téléchargement</label>
+            <input type="file" name="pro_photo" id="pro_photo">
+            <?php echo form_error('errors'); ?>
+            <?php echo form_error('fichier'); ?>
         </div>
 
         <div class="form-group">

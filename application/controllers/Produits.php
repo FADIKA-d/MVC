@@ -29,6 +29,9 @@ class Produits extends CI_Controller
         //tableau retourné de la méthode du modèle dans une variable
         $aView["categories"]= $aCategories;
 
+        // Chargement de la librairie 'upload'
+        $this->load->library('upload');
+
         // condition : si il existe des valeurs dans le tableau post
         if($this->input->post())
         { //2ème appel de la vue : traitement du formulaire
@@ -44,18 +47,67 @@ class Produits extends CI_Controller
             // condition : si echec de la validation des filtres
             if ($this->form_validation->run() == FALSE)
                 { 
-                // réaffichage de la vue formulaire 
+                // réaffichage de la vue du formulaire ajoouter
                 $this->load->view('ajouter', $aView);
                 }
             else // sinon (réussite de la validation des filtres : insertion des valeurs en BDD)
                 {
-                // chargement du modèle 'produitsModel' 
-                $this->load->model('ProduitsModel');
-                // appel de la méthode ajouter du modèle ProduitsModel
-                $aListe = $this->ProduitsModel->ajouter($data); 
-                // fonction de redirection vers la page liste pour afficher le nouvel ajout                  
-                redirect("produits/liste");
+                    // condition si :il existe un post files
+                    if($_FILES)
+                    {
 
+                    //extraction de l'extension du fichier dans la variable extension
+                    // methode 1
+                    $extension = substr(strrchr($_FILES["pro_photo"]["name"], "."), 1);
+                    
+                        //methode 2
+                        // // assignation du nom du fichier upload à la variable $path_parts
+                        // $path_parts= pathinfo($_FILES['pro_photo']['name']);
+
+                        // // assignation de l'extension du fichier upload à la variable $extension
+                        // $extension = $path_parts['extension'];
+
+                    }
+                    // chargement du modèle 'produitsModel' 
+                    $this->load->model('ProduitsModel');
+                    // appel de la méthode ajouter du modèle ProduitsModel
+                    $aId = $this->ProduitsModel->ajouter($data); 
+                    // recupération de l'id
+                  
+                            //id retourné de la méthode du modèle ajouter dans le tableau aView
+                            $aView["id"] = $aId;
+
+                    // chemin du fichier stocké
+                    $config['upload_path'] = './assets/img/';
+                    // nom du fichier
+                    $config['file_name'] = $aId . '.' . $extension;
+                    //fichiers autorisés
+                    $config['allowed_types'] = 'gif|jpg|png';
+                    //taille maximum  autorisée
+                    $config['max_size'] = 300;
+                    //largeur maximum  autorisée
+                    $config['max_width'] = 1024;
+                    //hauteur maximum  autorisée
+                    $config['max_height'] = 768;
+                    //chargement de la librairie 'upload' avec le tableau config
+                    $this->load->library('upload', $config);
+                    var_dump($config);
+                     // initialisation de config 
+                    $this->upload->initialize($config);
+                    // condition si : 
+                    if(! $this->upload->do_upload('pro_photo'))
+                    {
+                        // récupération des erreurs dans une variable errors
+                        $errors =  $this->upload->display_errors("<div class='alert alert-danger'>", "</div>");
+                        $aView["errors"]= $errors;
+                        // réaffichage de la vue du formulaire ajouter avec les donnés saisies et errors
+                        $this->load->view('ajouter', $aView);
+                    }
+                    else
+                    {
+                        // fonction de redirection vers la page liste pour afficher le nouvel ajout
+                        redirect('produits/liste');
+                    }
                 }
         }
         else
@@ -65,7 +117,7 @@ class Produits extends CI_Controller
         }
     }
     // fonction de modification d'un produit de la BDD
-    public function modifier()
+    public function modifier($id)
     {
         // chargement du modèle 'CategoriesModel' avec la requete ("SELECT * FROM jarditou_categories") ==> pour avoir la listes des catégories dans le formulaire
         $this->load->model('CategoriesModel');
@@ -76,8 +128,6 @@ class Produits extends CI_Controller
 
         // chargement du modèle 'produitsModel' 
         $this->load->model('ProduitsModel');
-        //
-        $id = $this->uri->segment(3);
         // appel de la méthode produit du modèle ProduitsModel d'affichage d'un produit de la BDD dans une variable
         $aProduit = $this->ProduitsModel->produit($id);
         //tableau retourné de la méthode du modèle dans le tableau aView
@@ -121,12 +171,10 @@ class Produits extends CI_Controller
         }
     }
     // fonction de suppression d'un produit de la BDD
-    public function supprimer()
+    public function supprimer($id)
     {
         // chargement du modèle 'produitsModel' 
         $this->load->model('ProduitsModel');
-        //
-        $id = $this->uri->segment(3);
         // appel de la méthode produit du modèle ProduitsModel d'affichage d'un produit de la BDD dans une variable
         $aProduit = $this->ProduitsModel->produit($id);
         //tableau retourné de la méthode du modèle dans le tableau aView

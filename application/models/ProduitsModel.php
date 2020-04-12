@@ -21,15 +21,16 @@ class ProduitsModel extends CI_Model
     public function ajouter($data) 
     {
         //query builder pattern
-        $this->db->insert('jarditou_produits', $data);        
+        $this->db->insert('jarditou_produits', $data);   
+        return $this->db->insert_id();  
     }
 
     // model de fonction d'affichage d'un produit de la BDD
     public function produit($id)
     {        
         //query builder pattern
-        $aProduits = $this->db->get_where('jarditou_produits', array ('pro_id'=> $id))->row();
-        return $aProduits;
+        $aProduit = $this->db->get_where('jarditou_produits', array ('pro_id'=> $id))->row();
+        return $aProduit;
     }
 
     // model de fonction de modification d'un produit de la BDD
@@ -46,4 +47,5 @@ class ProduitsModel extends CI_Model
         $this->db->delete('jarditou_produits', array('pro_id'=>$id));
         
     }
+    
 }
