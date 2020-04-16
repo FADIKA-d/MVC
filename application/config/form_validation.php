@@ -80,7 +80,7 @@ $config = array(
 
                 ),
             )
-            ),
+        ),
         'produits/modifier' => array(
             array(
                 'field' => 'pro_ref',
@@ -159,5 +159,152 @@ $config = array(
 
                 ),
             )
-        )
+        ),
+        'produits/inscription' => array(
+            array(
+                'field' => 'user_last_name',
+                'label' => 'prénom',
+                'rules' => 'required|trim|alpha_numeric_spaces',
+                'errors'=> array(
+                    'required' => 'Le %s doit être renseigné.',
+                    'alpha_numeric_spaces' => 'La %s n\'est pas valide.'
+                ),
+            ),
+            array(
+                'field' => 'user_name',
+                'label' => 'nom',
+                'rules' => 'required',
+                'errors'=> array(
+                    'required' => 'Le %s doit être renseigné.'
+                ),
+            ),
+            array(
+                'field' => 'user_email',
+                'label' => 'email',
+                'rules' => 'required|trim',
+                'errors'=> array(
+                    'required' => 'L\'%s doit être renseigné.'
+                ),
+            ),
+            array(
+                'field' => 'user_login',
+                'label' => 'identifiant',
+                'rules' => 'required|trim|is_unique[jarditou_users.user_login]|alpha_numeric_spaces',
+                'errors'=> array(
+                    'required' => 'L\'%s doit être renseigné.',
+                    'is_unique' => 'L\'%s existe déjà.',
+                    'alpha_numeric_spaces' => 'Le %s n\'est pas valide.'
+                ),
+            ),
+            array(
+                'field' => 'user_mdp',
+                'label' => 'mot de passe',
+                'rules' => 'required|trim|min_length[8]|max_length[60]',
+                'errors'=> array(
+                    'required' => 'Le %s doit être renseigné.',
+                    'min_length' => 'Le %s est trop court.',
+                    'max_length' => 'Le %s est trop long.'
+                ),
+            ),
+            array(
+                'field' => 'user_role',
+                'label' => 'role',
+                'rules' => 'required|trim',
+                'errors'=> array(
+                    'required' => 'Le %s doit être renseigné.'
+                ),
+            ),
+            array(
+                'field' => 'user_photo',
+                'label' => 'photo de profil',
+                'rules' => 'trim|alpha',
+                'errors'=> array(
+                    'alpha' => 'L\'extension %s n\'est pas valide.'
+                ),
+            )
+        ),
+        'produits/profil' => array(
+            array(
+                'field' => 'user_name',
+                'label' => 'nom',
+                'rules' => 'required|trim|stripslashes|strip_tags|alpha_numeric_spaces',
+                'errors'=> array(
+                    'required' => 'Le %s doit être renseigné.',
+                    'alpha_numeric_spaces' => 'La %s n\'est pas valide.'
+                ),
+            ),
+            array(
+                'field' => 'user_last_name',
+                'label' => 'prénom',
+                'rules' => 'required',
+                'errors'=> array(
+                    'required' => 'Le %s doit être renseigné.'
+                ),
+            ),
+            array(
+                'field' => 'user_email',
+                'label' => 'email',
+                'rules' => 'required|trim',
+                'errors'=> array(
+                    'required' => 'L\'%s doit être renseigné.'
+                ),
+            ),
+            array(
+                'field' => 'user_login',
+                'label' => 'identifiant',
+                'rules' => 'required|trim|is_unique|alpha_numeric_spaces',
+                'errors'=> array(
+                    'required' => 'L\'%s doit être renseigné.',
+                    'is_unique' => 'L\'%s existe déjà.',
+                    'alpha_numeric_spaces' => 'Le %s n\'est pas valide.'
+                ),
+            ),
+            array(
+                'field' => 'user_mdp',
+                'label' => 'mot de passe',
+                'rules' => 'required|trim|min_length[8]|max_length[60]',
+                'errors'=> array(
+                    'required' => 'Le %s doit être renseigné.',
+                    'alpha_numeric_spaces' => 'Le %s n\'est pas valide.',
+                    'min_length' => 'Le %s est trop court.',
+                    'max_length' => 'Le %s est trop long.'
+                ),
+            ),
+            array(
+                'field' => 'user_role',
+                'label' => 'role',
+                'rules' => 'required|trim',
+                'errors'=> array(
+                    'required' => 'Le %s doit être renseigné.'
+                ),
+            ),
+            array(
+                'field' => 'user_photo',
+                'label' => 'photo de profil',
+                'rules' => 'trim|alpha',
+                'errors'=> array(
+                    'alpha' => 'L\'extension %s n\'est pas valide.'
+                ),
+            )
+        ),
+         'produits/connexion' => array(
+                array(
+                    'field' => 'login_membre',
+                    'label' => 'login membre',
+                    'rules' => 'required',
+                    'errors'=> array(
+                        'required' => 'Le %s doit être renseignée.'
+                    ),
+                ),
+                array(
+                    'field' => 'password_membre',
+                    'label' => 'mot de passe du membre',
+                    'rules' => 'required|trim|min_length[8]|max_length[60]',
+                    'errors'=> array(
+                        'required' => 'Le %s doit être renseigné.',
+                        'min_length' => 'Le %s est trop court.',
+                        'max_length' => 'Le %s est trop long.'
+                    ),
+                )
+         )
 );

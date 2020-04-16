@@ -8,6 +8,7 @@ class ProduitsModel extends CI_Model
     {
         parent::__construct();
         $this->load->database();
+        $this->load->library('session');
     }
     // model de fonction d'affichage d'une table de la BDD
     public function liste()
