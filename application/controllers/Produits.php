@@ -248,7 +248,6 @@ class Produits extends CI_Controller
                         
                         $errors = $this->form_validation->set_message('password_membre', 'le mot de passe est invalide');
                         // récupération des erreurs dans une variable errors
-                        // $errors =  $this->upload->display_errors("<div class='alert alert-danger'>", "</div>");
                         $aView["errors"]= $errors;
                         // réaffichage de la vue du formulaire modifier avec les donnés saisies et errors
                         $this->load->view('connexion', $aView);
@@ -498,6 +497,5 @@ class Produits extends CI_Controller
             echo 'Vous n\'êtes pas connecté';
         }
     }
-
-
+    
 }
