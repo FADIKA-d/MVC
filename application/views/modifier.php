@@ -4,12 +4,16 @@
 <head>
     <meta charset="utf-8">
     <title>Modifier</title>
-    <link rel="stylesheet" href="<?= base_url("assets/css/style.css"); ?>">
+    <?php include "header_link.php" ?>
 </head>
 <body>
+<?php include "nav.php" ?> 
+<div class="container-fluid">
 
-    <a href="<?= site_url("produits/liste");?> ">Liste</a>
-    <a href="<?= site_url("produits/ajouter");?> ">Ajouter</a>
+<button class="btn "><i class="fas fa-reply"></i><a class="" href="<?= site_url("produits/liste");?> "> Retour liste des produits</a></button>
+<button class="btn "><i class="fas fa-plus"></i><a class="" href="<?= site_url("produits/ajouter/?pro_id="). $pro_id=$produit->pro_id ?> "> Ajouter un nouveau produit</a></button>
+<div class="col-10 d-flex justify-content-center">
+
 <?php 
     echo validation_errors(); 
     echo form_open_multipart(); 
@@ -81,10 +85,11 @@
             <input type="hidden" name="pro_d_ajout" id="pro_d_ajout" class="form-control" value="">
         </div>
 
-<button type="submit" >Modifier</button>
-<a  href="<?= site_url('produits/supprimer/'). $produit->pro_id ?> ">Supprimer</a>
+<button class="btn btn-outline-secondary" type="submit" >Modifier</button>
+<button class="btn btn-outline-danger" ><a  href="<?= site_url('produits/supprimer/'). $produit->pro_id ?> ">Supprimer</a></button>
+</div>
 
 </form>
-
+<?php include "footer_link.php" ?>
 </body>
 </html>

@@ -160,7 +160,7 @@ $config = array(
                 ),
             )
         ),
-        'produits/inscription' => array(
+        'utilisateurs/inscription' => array(
             array(
                 'field' => 'user_last_name',
                 'label' => 'prénom',
@@ -223,11 +223,11 @@ $config = array(
                 ),
             )
         ),
-        'produits/profil' => array(
+        'utilisateurs/modifier' => array(
             array(
                 'field' => 'user_name',
                 'label' => 'nom',
-                'rules' => 'required|trim|stripslashes|strip_tags|alpha_numeric_spaces',
+                'rules' => 'required|trim|alpha_numeric_spaces',
                 'errors'=> array(
                     'required' => 'Le %s doit être renseigné.',
                     'alpha_numeric_spaces' => 'La %s n\'est pas valide.'
@@ -252,24 +252,23 @@ $config = array(
             array(
                 'field' => 'user_login',
                 'label' => 'identifiant',
-                'rules' => 'required|trim|is_unique|alpha_numeric_spaces',
+                'rules' => 'required|trim|alpha_numeric_spaces',
                 'errors'=> array(
                     'required' => 'L\'%s doit être renseigné.',
-                    'is_unique' => 'L\'%s existe déjà.',
                     'alpha_numeric_spaces' => 'Le %s n\'est pas valide.'
                 ),
             ),
-            array(
-                'field' => 'user_mdp',
-                'label' => 'mot de passe',
-                'rules' => 'required|trim|min_length[8]|max_length[60]',
-                'errors'=> array(
-                    'required' => 'Le %s doit être renseigné.',
-                    'alpha_numeric_spaces' => 'Le %s n\'est pas valide.',
-                    'min_length' => 'Le %s est trop court.',
-                    'max_length' => 'Le %s est trop long.'
-                ),
-            ),
+            // array(
+            //     'field' => 'user_mdp',
+            //     'label' => 'mot de passe',
+            //     'rules' => 'required|trim|min_length[8]|max_length[60]',
+            //     'errors'=> array(
+            //         'required' => 'Le %s doit être renseigné.',
+            //         'alpha_numeric_spaces' => 'Le %s n\'est pas valide.',
+            //         'min_length' => 'Le %s est trop court.',
+            //         'max_length' => 'Le %s est trop long.'
+            //     ),
+            // ),
             array(
                 'field' => 'user_role',
                 'label' => 'role',
@@ -287,7 +286,7 @@ $config = array(
                 ),
             )
         ),
-         'produits/connexion' => array(
+         'utilisateurs/connexion' => array(
                 array(
                     'field' => 'login_membre',
                     'label' => 'login membre',

@@ -4,12 +4,21 @@
 <head>
     <meta charset="utf-8">
     <title>Ajouter</title>
-    <link rel="stylesheet" href="<?= base_url("assets/css/style.css"); ?>">
+    <?php include "header_link.php" ?> 
 </head>
 <body>
-
-    <a class="btn btn-secondary" href="<?= site_url("produits/liste");?> ">Retour</a>
-
+<?php include "nav.php" ?> 
+<div class="container-fluid">
+    <button class="btn btn-outline-secondary"><i class="fas fa-reply"></i><a class="" href="<?= site_url("produits/liste");?> ">Retour liste des produits</a></button>
+    <?php
+    if($pro_id=$this->input->get("pro_id"))
+    {
+        ?>
+        <button class="btn btn-outline-secondary"><i class="fas fa-reply"></i><a href="<?= site_url('produits/modifier/') . $pro_id ?>">Retour au produit </a></button>
+        <?php
+    }
+    ?>
+    <div class="col-10 d-flex justify-content-center">
     <?php 
         echo validation_errors(); 
         echo form_open_multipart(); 
@@ -81,6 +90,9 @@
 
         <button type="submit" class="btn btn-secondary" >Ajouter</button>
     </form>
+    </div>
+    </div>
+<?php include "footer_link.php" ?>
 
 </body>
 </html>
